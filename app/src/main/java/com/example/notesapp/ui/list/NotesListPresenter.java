@@ -31,11 +31,11 @@ public class NotesListPresenter implements Parcelable {
         }
     };
 
-    public void saveNote(String noteName, String date, String noteDescription){
+    public void saveNote(String noteName, String date, String noteDescription) {
         repository.addNoteToRepository(noteName, date, noteDescription);
     }
 
-    public void requestNotes(){
+    public void requestNotes() {
         view.showNotesList(repository.getNotes());
     }
 

@@ -44,6 +44,7 @@
         android:id="@+id/note_description"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="start"
         android:inputType="textMultiLine"
         android:textSize="@dimen/_13ssp" />
 

@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import com.example.notesapp.R;
 import com.example.notesapp.domain.ExistingNotesRepository;
 import com.example.notesapp.domain.Note1;
-import com.example.notesapp.ui.noteItem.NoteItemFragment;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
@@ -25,7 +24,6 @@ public class NotesListFragment extends Fragment implements NotesListView {
     private static NotesListPresenter presenter;
     public static final String KEY_NOTES_LIST = "KEY_NOTES_LIST";
     public static final String ARG_NOTES_LIST = "ARG_NOTES_LIST";
-    //public static final String ARG_PRESENTER = "presenter";
 
     public NotesListFragment() {
     }
@@ -33,7 +31,6 @@ public class NotesListFragment extends Fragment implements NotesListView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //presenter = getArguments().getParcelable(ARG_PRESENTER);
         presenter = new NotesListPresenter(this, new ExistingNotesRepository());
     }
 
@@ -53,7 +50,6 @@ public class NotesListFragment extends Fragment implements NotesListView {
     public void showNotesList(List<Note1> notesList) {
 
         for (Note1 note : notesList) {
-            // в лендскейпе заметка после сохранения не отображается в списке сразу
             View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.notes_list_item, notesListRoot, false);
             MaterialTextView itemNoteNameField = itemView.findViewById(R.id.notes_list_item_name_field);
             MaterialTextView itemNoteDateField = itemView.findViewById(R.id.notes_list_item_date_field);
@@ -74,7 +70,6 @@ public class NotesListFragment extends Fragment implements NotesListView {
 
             notesListRoot.addView(itemView);
         }
-
     }
 
     public static NotesListPresenter getPresenter() {

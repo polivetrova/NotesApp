@@ -15,45 +15,40 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton addNoteButton;
+    NotesListPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        NotesListPresenter presenter = NotesListFragment.getPresenter();
+
+        presenter = NotesListFragment.getPresenter();
 
         getSupportFragmentManager().setFragmentResultListener(NotesListFragment.KEY_NOTES_LIST, this, (requestKey, result) -> {
-
-            Note1 note = result.getParcelable(NotesListFragment.ARG_NOTES_LIST);
-
-            NoteItemFragment noteItemFragment = NoteItemFragment.newInstance(note, presenter);
-            FragmentManager manager = getSupportFragmentManager();
-            boolean isLandscape = getResources().getBoolean(R.bool.is_landscape);
-
-            if (isLandscape) {
-                manager.beginTransaction()
-                        .replace(R.id.fragment_notes_item_container, noteItemFragment)
-                        .commit();
-            } else {
-                manager.beginTransaction()
-                        .replace(R.id.fragment_container, noteItemFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
+            showNoteItemFragment(presenter, result.getParcelable(NotesListFragment.ARG_NOTES_LIST));
         });
 
-        // как передавать один и тот же презентер в оба фрагмента?
-
-        //NotesListFragment listFragment = new NotesListFragment();
+        // почему в лендскейпе отображается новый список?
+        // в лендскейпе заметка после сохранения не отображается в списке сразу
 
         addNoteButton = findViewById(R.id.add_note_button);
-        addNoteButton.setOnClickListener(v -> {
-            NoteItemFragment noteItemFragment = NoteItemFragment.newInstance(new Note1("", "", ""), presenter);
-            getSupportFragmentManager()
-                    .beginTransaction()
+        addNoteButton.setOnClickListener(v -> showNoteItemFragment(presenter, new Note1("", "", "")));
+    }
+
+    private void showNoteItemFragment(NotesListPresenter presenter, Note1 note) {
+        NoteItemFragment noteItemFragment = NoteItemFragment.newInstance(note, presenter);
+        FragmentManager manager = getSupportFragmentManager();
+        boolean isLandscape = getResources().getBoolean(R.bool.is_landscape);
+
+        if (isLandscape) {
+            manager.beginTransaction()
+                    .replace(R.id.fragment_notes_item_container, noteItemFragment)
+                    .commit();
+        } else {
+            manager.beginTransaction()
                     .replace(R.id.fragment_container, noteItemFragment)
                     .addToBackStack(null)
                     .commit();
-        });
+        }
     }
 }
