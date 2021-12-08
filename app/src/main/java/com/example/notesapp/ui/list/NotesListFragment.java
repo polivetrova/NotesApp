@@ -52,31 +52,29 @@ public class NotesListFragment extends Fragment implements NotesListView {
     @Override
     public void showNotesList(List<Note1> notesList) {
 
-        if (!notesList.isEmpty()) {
+        for (Note1 note : notesList) {
+            // в лендскейпе заметка после сохранения не отображается в списке сразу
+            View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.notes_list_item, notesListRoot, false);
+            MaterialTextView itemNoteNameField = itemView.findViewById(R.id.notes_list_item_name_field);
+            MaterialTextView itemNoteDateField = itemView.findViewById(R.id.notes_list_item_date_field);
+            MaterialTextView itemNoteDescriptionField = itemView.findViewById(R.id.notes_list_item_description_field);
 
-            for (Note1 note : notesList) { // после возвращения по кнопке "назад" все заметки не пересоздаются, а добавляются к тем, которые были созданы изначально - было три, после возвращения стало шесть - понять как исправить
-                // в лендскейпе заметка после сохранения не отображается в списке сразу
-                View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.notes_list_item, notesListRoot, false);
-                MaterialTextView itemNoteNameField = itemView.findViewById(R.id.notes_list_item_name_field);
-                MaterialTextView itemNoteDateField = itemView.findViewById(R.id.notes_list_item_date_field);
-                MaterialTextView itemNoteDescriptionField = itemView.findViewById(R.id.notes_list_item_description_field);
+            itemView.setOnClickListener(v -> {
 
-                itemView.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(ARG_NOTES_LIST, note);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable(ARG_NOTES_LIST, note);
+                getParentFragmentManager()
+                        .setFragmentResult(KEY_NOTES_LIST, bundle);
+            });
 
-                    getParentFragmentManager()
-                            .setFragmentResult(KEY_NOTES_LIST, bundle);
-                });
+            itemNoteNameField.setText(note.getNoteName1());
+            itemNoteDateField.setText(note.getDate1());
+            itemNoteDescriptionField.setText(note.getNoteDescription1());
 
-                itemNoteNameField.setText(note.getNoteName1());
-                itemNoteDateField.setText(note.getDate1());
-                itemNoteDescriptionField.setText(note.getNoteDescription1());
-
-                notesListRoot.addView(itemView);
-            }
+            notesListRoot.addView(itemView);
         }
+
     }
 
     public static NotesListPresenter getPresenter() {
