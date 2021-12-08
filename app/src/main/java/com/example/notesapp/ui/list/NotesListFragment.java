@@ -22,8 +22,8 @@ import java.util.List;
 
 public class NotesListFragment extends Fragment implements NotesListView {
 
-    private LinearLayout notesListLayout;
-    NotesListPresenter presenter;
+    private LinearLayout notesListRoot;
+    private NotesListPresenter presenter;
 
     public NotesListFragment() {
     }
@@ -42,7 +42,7 @@ public class NotesListFragment extends Fragment implements NotesListView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        notesListLayout = view.findViewById(R.id.notes_root);
+        notesListRoot = view.findViewById(R.id.notes_root);
         presenter.requestNotes();
     }
 
@@ -51,8 +51,9 @@ public class NotesListFragment extends Fragment implements NotesListView {
 
         if (!notesList.isEmpty()) {
 
-            for (Note1 note : notesList) {
-                View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.notes_list_item, notesListLayout, false);
+            for (Note1 note : notesList) { // после возвращения по кнопке "назад" все заметки не пересоздаются, а добавляются к тем, которые были созданы изначально - было три, после возвращения стало шесть - понять почему
+                // в лендскейпе заметка после сохранения не отображается в списке сразу
+                View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.notes_list_item, notesListRoot, false);
                 MaterialTextView itemNoteNameField = itemView.findViewById(R.id.notes_list_item_name_field);
                 MaterialTextView itemNoteDateField = itemView.findViewById(R.id.notes_list_item_date_field);
                 MaterialTextView itemNoteDescriptionField = itemView.findViewById(R.id.notes_list_item_description_field);
@@ -60,18 +61,31 @@ public class NotesListFragment extends Fragment implements NotesListView {
                 itemView.setOnClickListener(v -> {
                     NoteItemFragment noteItemFragment = NoteItemFragment.newInstance(note, presenter);
                     FragmentManager manager = getParentFragmentManager();
-                    manager.beginTransaction()
-                            .replace(R.id.fragment_container, noteItemFragment)
-                            .commit();
+                    boolean isLandscape = getResources().getBoolean(R.bool.is_landscape);
+
+                    if (isLandscape) {
+                        manager.beginTransaction()
+                                .replace(R.id.fragment_notes_item_container, noteItemFragment)
+                                .commit();
+                    } else {
+                        manager.beginTransaction()
+                                .replace(R.id.fragment_container, noteItemFragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }
                 });
 
                 itemNoteNameField.setText(note.getNoteName1());
                 itemNoteDateField.setText(note.getDate1());
                 itemNoteDescriptionField.setText(note.getNoteDescription1());
 
-                notesListLayout.addView(itemView);
+                notesListRoot.addView(itemView);
             }
 
         }
+    }
+
+    public NotesListPresenter getPresenter() {
+        return presenter;
     }
 }

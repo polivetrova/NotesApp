@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.View;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.example.notesapp.R;
 import com.example.notesapp.domain.Note1;
 import com.example.notesapp.ui.MainActivity;
+import com.example.notesapp.ui.list.NotesListFragment;
 import com.example.notesapp.ui.list.NotesListPresenter;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -62,7 +64,6 @@ public class NoteItemFragment extends Fragment {
         Note1 note = getArguments().getParcelable(ARG_NOTE);
         presenter = getArguments().getParcelable(ARG_PRESENTER);
 
-        AppCompatImageView returnButton = view.findViewById(R.id.back_arrow);
         MaterialButton saveButton = view.findViewById(R.id.save_button);
 
         noteNameField = view.findViewById(R.id.note_name);
@@ -73,14 +74,9 @@ public class NoteItemFragment extends Fragment {
         dateField.setText(note.getDate1());
         date = note.getDate1();
 
-        //displayDate();
 
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //закрыть фрагмент, ничего не сохранять
-            }
-        });
+
+        //displayDate(); - разобраться, как устанавливать текущую дату
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

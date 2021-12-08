@@ -8,13 +8,6 @@
     android:padding="@dimen/_16ssp"
     tools:context=".ui.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_gravity="center_vertical|center_horizontal"
-        tools:text="add new note"
-        tools:textSize="@dimen/_25ssp" />
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
         android:name="com.example.notesapp.ui.list.NotesListFragment"
