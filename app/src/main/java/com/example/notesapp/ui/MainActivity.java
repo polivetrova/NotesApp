@@ -17,6 +17,12 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton addNoteButton;
     NotesListPresenter presenter;
 
+
+    // почему в лендскейпе отображается новый список?
+    // в лендскейпе заметка после сохранения не отображается в списке сразу
+    // научиться сохранять изменения в существующей заметке, а не создавать из изменений новую
+    //
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +33,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().setFragmentResultListener(NotesListFragment.KEY_NOTES_LIST, this, (requestKey, result) -> {
             showNoteItemFragment(presenter, result.getParcelable(NotesListFragment.ARG_NOTES_LIST));
         });
-
-        // почему в лендскейпе отображается новый список?
-        // в лендскейпе заметка после сохранения не отображается в списке сразу
 
         addNoteButton = findViewById(R.id.add_note_button);
         addNoteButton.setOnClickListener(v -> showNoteItemFragment(presenter, new Note1("", "", "")));

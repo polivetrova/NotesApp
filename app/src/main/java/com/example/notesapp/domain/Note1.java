@@ -15,7 +15,6 @@ public class Note1 implements Parcelable {
         this.date1 = date1;
     }
 
-
     protected Note1(Parcel in) {
         noteName1 = in.readString();
         noteDescription1 = in.readString();
@@ -37,7 +36,6 @@ public class Note1 implements Parcelable {
     public String getNoteName1() {
         return noteName1;
     }
-
 
     public String getNoteDescription1() {
         return noteDescription1;

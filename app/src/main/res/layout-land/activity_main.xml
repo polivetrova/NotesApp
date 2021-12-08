@@ -26,12 +26,12 @@
         android:id="@+id/add_note_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_16ssp"
+        android:layout_marginBottom="@dimen/_16ssp"
         android:contentDescription="@string/create_new_note"
         app:elevation="0dp"
-        app:srcCompat="@drawable/ic_action_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="@dimen/_16ssp"
-        android:layout_marginEnd="@dimen/_16ssp"/>
+        app:srcCompat="@drawable/ic_action_add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

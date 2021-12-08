@@ -28,8 +28,9 @@ public class NoteItemFragment extends Fragment {
     private NotesListPresenter presenter;
     private TextInputEditText noteNameField;
     private TextInputEditText noteDescriptionField;
-    private MaterialTextView dateField;
     private String date;
+    private Note1 note;
+    private MaterialTextView dateField;
 
     public NoteItemFragment() {
         super(R.layout.fragment_note_item);
@@ -53,39 +54,29 @@ public class NoteItemFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Note1 note = getArguments().getParcelable(ARG_NOTE);
+        note = getArguments().getParcelable(ARG_NOTE);
         presenter = getArguments().getParcelable(ARG_PRESENTER);
 
         MaterialButton saveButton = view.findViewById(R.id.save_button);
-
         noteNameField = view.findViewById(R.id.note_name);
         noteNameField.setText(note.getNoteName1());
         noteDescriptionField = view.findViewById(R.id.note_description);
         noteDescriptionField.setText(note.getNoteDescription1());
         dateField = view.findViewById(R.id.note_date_created);
-        dateField.setText(note.getDate1());
-        if(!note.getDate1().equals("")){
-            date = note.getDate1();
-        } else {
-            date = displayDate();
-        }
-
-
-        //displayDate(); - разобраться, как устанавливать текущую дату
+        displayDate();
 
         saveButton.setOnClickListener(v -> addNewNote());
     }
 
-    private String displayDate() {
+    private void displayDate() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ROOT);
         date = dateFormat.format(calendar.getTime());
         dateField.setText(date);
-        return date;
     }
 
-
     public void addNewNote() {
+
         String noteName;
         String noteDescription;
 
@@ -103,5 +94,7 @@ public class NoteItemFragment extends Fragment {
 
         Toast.makeText(getActivity(), "Saved!",
                 Toast.LENGTH_LONG).show();
+
+        getParentFragmentManager().popBackStack();
     }
 }

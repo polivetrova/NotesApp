@@ -49,26 +49,29 @@ public class NotesListFragment extends Fragment implements NotesListView {
     @Override
     public void showNotesList(List<Note1> notesList) {
 
-        for (Note1 note : notesList) {
-            View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.notes_list_item, notesListRoot, false);
-            MaterialTextView itemNoteNameField = itemView.findViewById(R.id.notes_list_item_name_field);
-            MaterialTextView itemNoteDateField = itemView.findViewById(R.id.notes_list_item_date_field);
-            MaterialTextView itemNoteDescriptionField = itemView.findViewById(R.id.notes_list_item_description_field);
+        if(!notesList.isEmpty()) {
 
-            itemView.setOnClickListener(v -> {
+            for (Note1 note : notesList) {
+                View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.notes_list_item, notesListRoot, false);
+                MaterialTextView itemNoteNameField = itemView.findViewById(R.id.notes_list_item_name_field);
+                MaterialTextView itemNoteDateField = itemView.findViewById(R.id.notes_list_item_date_field);
+                MaterialTextView itemNoteDescriptionField = itemView.findViewById(R.id.notes_list_item_description_field);
 
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(ARG_NOTES_LIST, note);
+                itemView.setOnClickListener(v -> {
 
-                getParentFragmentManager()
-                        .setFragmentResult(KEY_NOTES_LIST, bundle);
-            });
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(ARG_NOTES_LIST, note);
 
-            itemNoteNameField.setText(note.getNoteName1());
-            itemNoteDateField.setText(note.getDate1());
-            itemNoteDescriptionField.setText(note.getNoteDescription1());
+                    getParentFragmentManager()
+                            .setFragmentResult(KEY_NOTES_LIST, bundle);
+                });
 
-            notesListRoot.addView(itemView);
+                itemNoteNameField.setText(note.getNoteName1());
+                itemNoteDateField.setText(note.getDate1());
+                itemNoteDescriptionField.setText(note.getNoteDescription1());
+
+                notesListRoot.addView(itemView);
+            }
         }
     }
 
