@@ -4,22 +4,15 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.notesapp.R;
 import com.example.notesapp.domain.Note1;
-import com.example.notesapp.ui.MainActivity;
-import com.example.notesapp.ui.list.NotesListFragment;
 import com.example.notesapp.ui.list.NotesListPresenter;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -30,7 +23,7 @@ import java.util.Locale;
 public class NoteItemFragment extends Fragment {
 
     private static final String ARG_NOTE = "note";
-    private static final String ARG_PRESENTER = "presenter";
+    public static final String ARG_PRESENTER = "presenter";
 
     private NotesListPresenter presenter;
     private TextInputEditText noteNameField;
@@ -75,17 +68,9 @@ public class NoteItemFragment extends Fragment {
         date = note.getDate1();
 
 
-
         //displayDate(); - разобраться, как устанавливать текущую дату
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addNewNote();
-            }
-        });
-
-
+        saveButton.setOnClickListener(v -> addNewNote());
     }
 
     /*private void displayDate() {
@@ -96,7 +81,7 @@ public class NoteItemFragment extends Fragment {
     }*/
 
 
-    private void addNewNote() {
+    public void addNewNote() {
         String noteName;
         String noteDescription;
 
