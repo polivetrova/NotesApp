@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NotesApp</string>
+    <string name="save">Save</string>
+    <string name="create_new_note">create_new_note</string>
 </resources>
