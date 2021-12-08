@@ -30,7 +30,6 @@ public class NoteItemFragment extends Fragment {
     private TextInputEditText noteDescriptionField;
     private MaterialTextView dateField;
     private String date;
-//    private SimpleDateFormat dateFormat;
 
     public NoteItemFragment() {
         super(R.layout.fragment_note_item);
@@ -65,7 +64,11 @@ public class NoteItemFragment extends Fragment {
         noteDescriptionField.setText(note.getNoteDescription1());
         dateField = view.findViewById(R.id.note_date_created);
         dateField.setText(note.getDate1());
-        date = note.getDate1();
+        if(!note.getDate1().equals("")){
+            date = note.getDate1();
+        } else {
+            date = displayDate();
+        }
 
 
         //displayDate(); - разобраться, как устанавливать текущую дату
@@ -73,12 +76,13 @@ public class NoteItemFragment extends Fragment {
         saveButton.setOnClickListener(v -> addNewNote());
     }
 
-    /*private void displayDate() {
-        Calendar calendar = new Cale
-        dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.ROOT);
+    private String displayDate() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ROOT);
         date = dateFormat.format(calendar.getTime());
         dateField.setText(date);
-    }*/
+        return date;
+    }
 
 
     public void addNewNote() {
