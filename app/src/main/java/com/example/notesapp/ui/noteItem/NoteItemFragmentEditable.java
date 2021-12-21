@@ -5,12 +5,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.notesapp.R;
 import com.example.notesapp.domain.Note1;
+import com.example.notesapp.ui.MainActivity;
 import com.example.notesapp.ui.list.NotesListPresenter;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -95,6 +97,6 @@ public class NoteItemFragmentEditable extends Fragment {
         Toast.makeText(getActivity(), "Saved!",
                 Toast.LENGTH_LONG).show();
 
-        getParentFragmentManager().popBackStack();
+        getParentFragmentManager().popBackStack(MainActivity.backstackKeyNotesList, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 }

@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton addNoteButton;
     NotesListPresenter presenter;
     FragmentManager manager = getSupportFragmentManager();
+    public static String backstackKeyNotesList = "Notes list";
 
 
 
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             manager.beginTransaction()
                     .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(null)
+                    .addToBackStack(backstackKeyNotesList)
                     .commit();
         }
     }
