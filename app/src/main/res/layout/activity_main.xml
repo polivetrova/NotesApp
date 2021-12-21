@@ -13,25 +13,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary_color">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="@string/app_name"
-            app:titleTextColor="?attr/colorOnPrimary"/>
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary_color">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/app_name"
+                app:titleTextColor="?attr/colorOnPrimary" />
 
-    <include
-        android:id="@+id/contents_main"
-        layout="@layout/contents_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <include
+            android:id="@+id/contents_main"
+            layout="@layout/contents_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

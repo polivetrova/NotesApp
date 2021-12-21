@@ -1,10 +1,8 @@
 package com.example.notesapp.ui;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -12,7 +10,6 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -114,18 +111,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startTransaction(Fragment fragment) {
-        boolean isLandscape = getResources().getBoolean(R.bool.is_landscape);
+        manager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(backstackKeyNotesList)
+                .commit();
 
-        if (isLandscape) {
-            manager.beginTransaction()
-                    .replace(R.id.fragment_notes_item_container, fragment)
-                    .commit();
-        } else {
-            manager.beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(backstackKeyNotesList)
-                    .commit();
-        }
     }
 
     @Override
