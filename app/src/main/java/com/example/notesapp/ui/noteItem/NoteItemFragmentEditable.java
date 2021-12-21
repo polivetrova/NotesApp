@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.notesapp.R;
 import com.example.notesapp.domain.Note1;
 import com.example.notesapp.ui.MainActivity;
+import com.example.notesapp.ui.list.NotesListFragment;
 import com.example.notesapp.ui.list.NotesListPresenter;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -25,24 +26,21 @@ import java.util.Locale;
 public class NoteItemFragmentEditable extends Fragment {
 
     public static final String ARG_NOTE = "note";
-    public static final String ARG_PRESENTER = "presenter";
 
     private NotesListPresenter presenter;
     private TextInputEditText noteNameField;
     private TextInputEditText noteDescriptionField;
     private String date;
-    private Note1 note;
     private MaterialTextView dateField;
 
     public NoteItemFragmentEditable() {
         super(R.layout.fragment_note_item_editable);
     }
 
-    public static NoteItemFragmentEditable newInstance(Note1 note, NotesListPresenter presenter) {
+    public static NoteItemFragmentEditable newInstance(Note1 note) {
         NoteItemFragmentEditable fragment = new NoteItemFragmentEditable();
         Bundle args = new Bundle();
         args.putParcelable(ARG_NOTE, note);
-        args.putParcelable(ARG_PRESENTER, presenter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,8 +54,8 @@ public class NoteItemFragmentEditable extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        note = getArguments().getParcelable(ARG_NOTE);
-        presenter = getArguments().getParcelable(ARG_PRESENTER);
+        Note1 note = getArguments().getParcelable(ARG_NOTE);
+        presenter = NotesListFragment.presenter;
 
         MaterialButton saveButton = view.findViewById(R.id.save_button);
         noteNameField = view.findViewById(R.id.note_name_view);

@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +23,13 @@ import java.util.List;
 public class NotesListFragment extends Fragment implements NotesListView {
 
     private LinearLayout notesListRoot;
-    private static NotesListPresenter presenter;
+    public static NotesListPresenter presenter;
     public static final String KEY_NOTES_LIST = "KEY_NOTES_LIST";
     public static final String ARG_NOTES_LIST = "ARG_NOTES_LIST";
     public static final String FRAGMENT_TYPE = "NoteItemFragmentEditable or Uneditable";
 
     public NotesListFragment() {
+
     }
 
     @Override
@@ -67,8 +69,12 @@ public class NotesListFragment extends Fragment implements NotesListView {
                     editTheNoteButton.setVisibility(View.VISIBLE);
 
                     openTheNoteButton.setOnClickListener(v1 -> createFragmentResultBundle(note, false));
-
                     editTheNoteButton.setOnClickListener(v2 -> createFragmentResultBundle(note, true));
+
+                    new Handler().postDelayed(() -> {
+                        openTheNoteButton.setVisibility(View.INVISIBLE);
+                        editTheNoteButton.setVisibility(View.INVISIBLE);
+                    }, 5000);
 
                 });
 
@@ -88,9 +94,5 @@ public class NotesListFragment extends Fragment implements NotesListView {
 
         getParentFragmentManager()
                 .setFragmentResult(KEY_NOTES_LIST, bundle);
-    }
-
-    public static NotesListPresenter getPresenter() {
-        return presenter;
     }
 }

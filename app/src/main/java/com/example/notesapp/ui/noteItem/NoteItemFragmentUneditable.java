@@ -4,7 +4,6 @@ import static com.example.notesapp.ui.list.NotesListFragment.FRAGMENT_TYPE;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.notesapp.R;
 import com.example.notesapp.domain.Note1;
-import com.example.notesapp.ui.list.NotesListPresenter;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.text.SimpleDateFormat;
@@ -22,21 +20,19 @@ import java.util.Locale;
 
 public class NoteItemFragmentUneditable extends Fragment {
 
-    public static final String ARG_NOTE_2= "note 2";
+    public static final String ARG_NOTE_2 = "note 2";
     public static final String KEY_NOTE_ITEM = "KEY_NOTE_ITEM";
 
-    public static final String ARG_PRESENTER_2 = "presenter 2"; //?
     private MaterialTextView dateTextView;
 
     public NoteItemFragmentUneditable() {
         super(R.layout.fragment_note_item_uneditable);
     }
 
-    public static NoteItemFragmentUneditable newInstance(Note1 note, NotesListPresenter presenter) {
+    public static NoteItemFragmentUneditable newInstance(Note1 note) {
         NoteItemFragmentUneditable fragment = new NoteItemFragmentUneditable();
         Bundle args = new Bundle();
         args.putParcelable(ARG_NOTE_2, note);
-        args.putParcelable(ARG_PRESENTER_2, presenter);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,18 +56,13 @@ public class NoteItemFragmentUneditable extends Fragment {
         dateTextView = view.findViewById(R.id.note_date_created_view);
         displayDate();
 
-        editButton.setOnClickListener(new View.OnClickListener() {
+        editButton.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(ARG_NOTE_2, note);
+            bundle.putBoolean(FRAGMENT_TYPE, true);
 
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(ARG_NOTE_2, note);
-                bundle.putBoolean(FRAGMENT_TYPE, true);
-
-                getParentFragmentManager()
-                        .setFragmentResult(KEY_NOTE_ITEM, bundle);
-            }
-
+            getParentFragmentManager()
+                    .setFragmentResult(KEY_NOTE_ITEM, bundle);
         });
     }
 
