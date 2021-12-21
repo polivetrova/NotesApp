@@ -22,6 +22,11 @@ import com.example.notesapp.ui.noteItem.NoteItemFragmentUneditable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textview.MaterialTextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View header = navigationView.getHeaderView(0);
+        MaterialTextView dateTextView = header.findViewById(R.id.drawer_date_display);
+
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
@@ -88,6 +96,15 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
+
+        displayDate(dateTextView);
+    }
+
+    public static void displayDate(MaterialTextView dateField) {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ROOT);
+        String date = dateFormat.format(calendar.getTime());
+        dateField.setText(date);
     }
 
     private void openItemsFromMenu(Fragment fragment) {
@@ -97,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.fragment_container, fragment)
                 .commit();
         drawer.closeDrawers();
-
     }
 
     private void showUneditableNoteItemFragment(Note1 note) {
@@ -115,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(backstackKeyNotesList)
                 .commit();
-
     }
 
     @Override

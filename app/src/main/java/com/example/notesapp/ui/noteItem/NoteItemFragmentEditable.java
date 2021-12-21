@@ -63,16 +63,10 @@ public class NoteItemFragmentEditable extends Fragment {
         noteDescriptionField = view.findViewById(R.id.note_description_view);
         noteDescriptionField.setText(note.getNoteDescription1());
         dateField = view.findViewById(R.id.note_date_created_view);
-        displayDate();
+        MainActivity.displayDate(dateField);
+        date = dateField.getText().toString();
 
         saveButton.setOnClickListener(v -> addNewNote());
-    }
-
-    public void displayDate() {
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ROOT);
-        date = dateFormat.format(calendar.getTime());
-        dateField.setText(date);
     }
 
     public void addNewNote() {

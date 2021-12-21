@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.notesapp.R;
 import com.example.notesapp.domain.Note1;
+import com.example.notesapp.ui.MainActivity;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.text.SimpleDateFormat;
@@ -54,7 +55,7 @@ public class NoteItemFragmentUneditable extends Fragment {
         MaterialTextView noteDescriptionView = view.findViewById(R.id.note_description_view);
         noteDescriptionView.setText(note.getNoteDescription1());
         dateTextView = view.findViewById(R.id.note_date_created_view);
-        displayDate();
+        MainActivity.displayDate(dateTextView);
 
         editButton.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -65,12 +66,4 @@ public class NoteItemFragmentUneditable extends Fragment {
                     .setFragmentResult(KEY_NOTE_ITEM, bundle);
         });
     }
-
-    public void displayDate() {
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ROOT);
-        String date = dateFormat.format(calendar.getTime());
-        dateTextView.setText(date);
-    }
-
 }

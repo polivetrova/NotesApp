@@ -13,6 +13,7 @@
         android:id="@+id/imageView"
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:layout_marginTop="@dimen/_32ssp"
         android:contentDescription="@string/user_avatar"
         app:srcCompat="@drawable/ic_avatar" />
 
@@ -22,10 +23,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         tools:text="user name" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/drawer_date_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         tools:text="2220.12.12" />
+
 </LinearLayout>
