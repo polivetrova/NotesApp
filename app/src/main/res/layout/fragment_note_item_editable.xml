@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.noteItem.NoteItemFragment">
+    android:padding="@dimen/_16ssp"
+    tools:context=".ui.noteItem.NoteItemFragmentEditable">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,14 +26,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/note_name"
+        android:id="@+id/note_name_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:textSize="@dimen/_16ssp" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/note_date_created"
+        android:id="@+id/note_date_created_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_16ssp"
@@ -41,7 +42,7 @@
         android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/note_description"
+        android:id="@+id/note_description_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="start"

@@ -5,9 +5,13 @@
       <map>
         <entry key="..\:/NotesApp/app/src/main/res/layout-land/activity_main.xml" value="0.1" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/NotesApp/app/src/main/res/layout/edit_button.xml" value="0.28020833333333334" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_note_item.xml" value="0.18857142857142858" />
+        <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_note_item_editable.xml" value="0.28020833333333334" />
+        <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_note_item_uneditable.xml" value="0.18857142857142858" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_notes_list.xml" value="0.1" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/notes_list_item.xml" value="0.18857142857142858" />
+        <entry key="..\:/NotesApp/app/src/main/res/layout/notes_list_item_uneditable.xml" value="0.18020833333333333" />
       </map>
     </option>
   </component>
