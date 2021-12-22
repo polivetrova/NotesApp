@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager manager = getSupportFragmentManager();
     public static String backstackKeyNotesList = "Notes list";
 
-    // почему в лендскейпе отображается новый список?
-    // в лендскейпе заметка после сохранения не отображается в списке сразу
     // научиться сохранять изменения в существующей заметке, а не создавать из изменений новую
     //
 
@@ -84,8 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
             switch (id) {
                 case R.id.nav_notes_main:
-                    addNoteButton.setVisibility(View.VISIBLE);
+                    addNoteButton.show();
                     manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    drawer.closeDrawers();
                     return true;
                 case R.id.nav_about:
                     openItemsFromMenu(new AboutFragment());
@@ -96,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-
         displayDate(dateTextView);
     }
 
@@ -127,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startTransaction(Fragment fragment) {
+        addNoteButton.hide();
         manager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(backstackKeyNotesList)
@@ -148,5 +147,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(event);
+    }
+
+    public void showFloatingActionButton() {
+        addNoteButton.show();
     }
 }

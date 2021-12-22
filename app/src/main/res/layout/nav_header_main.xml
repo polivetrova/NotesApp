@@ -27,6 +27,7 @@
         android:id="@+id/drawer_date_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_2ssp"
         android:textStyle="bold"
         tools:text="2220.12.12" />
 

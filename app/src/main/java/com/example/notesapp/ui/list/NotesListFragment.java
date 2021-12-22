@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import com.example.notesapp.R;
 import com.example.notesapp.domain.ExistingNotesRepository;
 import com.example.notesapp.domain.Note1;
+import com.example.notesapp.ui.MainActivity;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
@@ -52,6 +53,8 @@ public class NotesListFragment extends Fragment implements NotesListView {
 
     @Override
     public void showNotesList(List<Note1> notesList) {
+
+        ((MainActivity) getActivity()).showFloatingActionButton();
 
         if (!notesList.isEmpty()) {
 

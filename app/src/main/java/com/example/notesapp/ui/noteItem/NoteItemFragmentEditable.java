@@ -19,10 +19,6 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
 public class NoteItemFragmentEditable extends Fragment {
 
     public static final String ARG_NOTE = "note";
@@ -31,7 +27,6 @@ public class NoteItemFragmentEditable extends Fragment {
     private TextInputEditText noteNameField;
     private TextInputEditText noteDescriptionField;
     private String date;
-    private MaterialTextView dateField;
 
     public NoteItemFragmentEditable() {
         super(R.layout.fragment_note_item_editable);
@@ -62,7 +57,7 @@ public class NoteItemFragmentEditable extends Fragment {
         noteNameField.setText(note.getNoteName1());
         noteDescriptionField = view.findViewById(R.id.note_description_view);
         noteDescriptionField.setText(note.getNoteDescription1());
-        dateField = view.findViewById(R.id.note_date_created_view);
+        MaterialTextView dateField = view.findViewById(R.id.note_date_created_view);
         MainActivity.displayDate(dateField);
         date = dateField.getText().toString();
 
@@ -87,7 +82,7 @@ public class NoteItemFragmentEditable extends Fragment {
         presenter.saveNote(noteName, date, noteDescription);
 
         Toast.makeText(getActivity(), "Saved!",
-                Toast.LENGTH_LONG).show();
+                Toast.LENGTH_SHORT).show();
 
         getParentFragmentManager().popBackStack(MainActivity.backstackKeyNotesList, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }

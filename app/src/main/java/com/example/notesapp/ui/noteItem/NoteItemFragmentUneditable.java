@@ -15,16 +15,10 @@ import com.example.notesapp.domain.Note1;
 import com.example.notesapp.ui.MainActivity;
 import com.google.android.material.textview.MaterialTextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
 public class NoteItemFragmentUneditable extends Fragment {
 
     public static final String ARG_NOTE_2 = "note 2";
     public static final String KEY_NOTE_ITEM = "KEY_NOTE_ITEM";
-
-    private MaterialTextView dateTextView;
 
     public NoteItemFragmentUneditable() {
         super(R.layout.fragment_note_item_uneditable);
@@ -54,7 +48,7 @@ public class NoteItemFragmentUneditable extends Fragment {
         noteNameView.setText(note.getNoteName1());
         MaterialTextView noteDescriptionView = view.findViewById(R.id.note_description_view);
         noteDescriptionView.setText(note.getNoteDescription1());
-        dateTextView = view.findViewById(R.id.note_date_created_view);
+        MaterialTextView dateTextView = view.findViewById(R.id.note_date_created_view);
         MainActivity.displayDate(dateTextView);
 
         editButton.setOnClickListener(v -> {
