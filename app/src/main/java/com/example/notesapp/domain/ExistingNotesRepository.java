@@ -19,10 +19,6 @@ public class ExistingNotesRepository implements NotesRepository {
 
     @Override
     public void deleteNoteFromRepository(Note1 note) {
-        //int index = result.indexOf(note);
         result.remove(note);
-        // как-то передавать сюда индекс (порядковый номер) заметки и по нему уже удалять???
-
-
     }
 }
