@@ -20,8 +20,8 @@
     <com.google.android.material.textfield.TextInputEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        tools:text="user name" />
+        android:hint="@string/enter_your_username"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/drawer_date_display"
