@@ -1,9 +1,14 @@
 package com.example.notesapp.ui.list;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.notesapp.domain.Note1;
 import com.example.notesapp.domain.NotesRepository;
+import com.example.notesapp.ui.MainActivity;
 
 public class NotesListPresenter implements Parcelable {
 
@@ -36,7 +41,14 @@ public class NotesListPresenter implements Parcelable {
     }
 
     public void requestNotes() {
-        view.showNotesList(repository.getNotes());
+
+        //if (!repository.getNotes().isEmpty()) {
+            view.showNotesList(repository.getNotes());
+        //} else {
+
+
+        //}
+
     }
 
     @Override
@@ -46,5 +58,9 @@ public class NotesListPresenter implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+    }
+
+    public void deleteNote(Note1 note) {
+        repository.deleteNoteFromRepository(note);
     }
 }

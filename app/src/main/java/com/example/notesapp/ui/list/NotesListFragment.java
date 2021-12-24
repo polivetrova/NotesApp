@@ -1,9 +1,11 @@
 package com.example.notesapp.ui.list;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.notesapp.R;
 import com.example.notesapp.domain.ExistingNotesRepository;
@@ -56,38 +59,48 @@ public class NotesListFragment extends Fragment implements NotesListView {
 
         ((MainActivity) getActivity()).showFloatingActionButton();
 
-        if (!notesList.isEmpty()) {
+        for (Note1 note : notesList) {
+            View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.notes_list_item, notesListRoot, false);
+            MaterialTextView itemNoteNameField = itemView.findViewById(R.id.notes_list_item_name_field);
+            MaterialTextView itemNoteDateField = itemView.findViewById(R.id.notes_list_item_date_field);
+            MaterialTextView itemNoteDescriptionField = itemView.findViewById(R.id.notes_list_item_description_field);
+            AppCompatImageView openTheNoteButton = itemView.findViewById(R.id.open_note_button);
+            AppCompatImageView editTheNoteButton = itemView.findViewById(R.id.edit_note_button);
 
-            for (Note1 note : notesList) {
-                View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.notes_list_item, notesListRoot, false);
-                MaterialTextView itemNoteNameField = itemView.findViewById(R.id.notes_list_item_name_field);
-                MaterialTextView itemNoteDateField = itemView.findViewById(R.id.notes_list_item_date_field);
-                MaterialTextView itemNoteDescriptionField = itemView.findViewById(R.id.notes_list_item_description_field);
-                AppCompatImageView openTheNoteButton = itemView.findViewById(R.id.open_note_button);
-                AppCompatImageView editTheNoteButton = itemView.findViewById(R.id.edit_note_button);
+            itemView.setOnClickListener(v -> {
 
-                itemView.setOnClickListener(v -> {
+                openTheNoteButton.setVisibility(View.VISIBLE);
+                editTheNoteButton.setVisibility(View.VISIBLE);
 
-                    openTheNoteButton.setVisibility(View.VISIBLE);
-                    editTheNoteButton.setVisibility(View.VISIBLE);
+                openTheNoteButton.setOnClickListener(v1 -> createFragmentResultBundle(note, false));
+                editTheNoteButton.setOnClickListener(v2 -> createFragmentResultBundle(note, true));
 
-                    openTheNoteButton.setOnClickListener(v1 -> createFragmentResultBundle(note, false));
-                    editTheNoteButton.setOnClickListener(v2 -> createFragmentResultBundle(note, true));
+                new Handler().postDelayed(() -> {
+                    openTheNoteButton.setVisibility(View.INVISIBLE);
+                    editTheNoteButton.setVisibility(View.INVISIBLE);
+                }, 5000);
 
-                    new Handler().postDelayed(() -> {
-                        openTheNoteButton.setVisibility(View.INVISIBLE);
-                        editTheNoteButton.setVisibility(View.INVISIBLE);
-                    }, 5000);
+            });
 
-                });
+            itemView.setOnLongClickListener(v -> {
+                new AlertDialog.Builder(requireContext())
+                        .setTitle("Want to delete the note?")
+                        .setPositiveButton("Yes", (dialog, which) -> {
+                            presenter.deleteNote(note);
+                            itemView.setVisibility(View.GONE);
+                        })
+                        .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                        .show();
+                return false;
+            });
 
-                itemNoteNameField.setText(note.getNoteName1());
-                itemNoteDateField.setText(note.getDate1());
-                itemNoteDescriptionField.setText(note.getNoteDescription1());
+            itemNoteNameField.setText(note.getNoteName1());
+            itemNoteDateField.setText(note.getDate1());
+            itemNoteDescriptionField.setText(note.getNoteDescription1());
 
-                notesListRoot.addView(itemView);
-            }
+            notesListRoot.addView(itemView);
         }
+
     }
 
     public void createFragmentResultBundle(Note1 note, boolean isEditable) {

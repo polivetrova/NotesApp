@@ -29,7 +29,7 @@ public class TasksFragment extends Fragment {
         text.setOnClickListener(v -> new AlertDialog.Builder(requireContext())
                 .setTitle("Sorry!")
                 .setMessage("We are still working on this feature.")
-                .setPositiveButton("Cool!", (dialog, which) -> dialog.cancel())
+                .setPositiveButton("Cool!", (dialog, which) -> dialog.dismiss())
                 .show());
     }
 }
