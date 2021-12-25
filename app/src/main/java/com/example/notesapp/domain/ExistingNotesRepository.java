@@ -1,12 +1,11 @@
 package com.example.notesapp.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ExistingNotesRepository implements NotesRepository {
 
-    ArrayList<Note1> result = new ArrayList<>(Arrays.asList(new Note1("dfslkjdfl", "sdflsdjfkl", "sdpfispo")));
+    ArrayList<Note1> result = new ArrayList<>();
 
     @Override
     public List<Note1> getNotes() {

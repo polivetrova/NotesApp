@@ -5,9 +5,9 @@ import android.os.Parcelable;
 
 public class Note1 implements Parcelable {
 
-    private String noteName1;
-    private String noteDescription1;
-    private String date1;
+    private final String noteName1;
+    private final String noteDescription1;
+    private final String date1;
 
     public Note1(String noteName1, String date1, String noteDescription1) {
         this.noteName1 = noteName1;

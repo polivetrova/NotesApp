@@ -3,15 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/NotesApp/app/src/main/res/drawable-anydpi/ic_avatar.xml" value="0.2235897435897436" />
+        <entry key="..\:/NotesApp/app/src/main/res/drawable/side_nav_bar.xml" value="0.2235897435897436" />
         <entry key="..\:/NotesApp/app/src/main/res/layout-land/activity_main.xml" value="0.1" />
-        <entry key="..\:/NotesApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/NotesApp/app/src/main/res/layout-land/contents_main.xml" value="0.17857142857142858" />
+        <entry key="..\:/NotesApp/app/src/main/res/layout/activity_main.xml" value="0.14285714285714285" />
+        <entry key="..\:/NotesApp/app/src/main/res/layout/contents_main.xml" value="0.2857142857142857" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/edit_button.xml" value="0.28020833333333334" />
+        <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_about.xml" value="0.2109375" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_note_item.xml" value="0.18857142857142858" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_note_item_editable.xml" value="0.28020833333333334" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_note_item_uneditable.xml" value="0.18857142857142858" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_notes_list.xml" value="0.1" />
+        <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_tasks.xml" value="0.2109375" />
+        <entry key="..\:/NotesApp/app/src/main/res/layout/nav_header_main.xml" value="0.2857142857142857" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/notes_list_item.xml" value="0.18857142857142858" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/notes_list_item_uneditable.xml" value="0.18020833333333333" />
+        <entry key="..\:/NotesApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.2109375" />
       </map>
     </option>
   </component>
