@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tasks_default_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

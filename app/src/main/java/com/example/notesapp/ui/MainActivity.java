@@ -30,6 +30,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
     FloatingActionButton addNoteButton;
     DrawerLayout drawer;
     FragmentManager manager = getSupportFragmentManager();
@@ -62,14 +63,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initDrawer();
     }
 
     private void initDrawer() {
         drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, R.string.nav_drawer_open, R.string.nav_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 

@@ -3,6 +3,7 @@ package com.example.notesapp.ui.list;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.notesapp.domain.Note1;
 import com.example.notesapp.domain.NotesRepository;
 
 public class NotesListPresenter implements Parcelable {
@@ -46,5 +47,9 @@ public class NotesListPresenter implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+    }
+
+    public void deleteNote(Note1 note) {
+        repository.deleteNoteFromRepository(note);
     }
 }
