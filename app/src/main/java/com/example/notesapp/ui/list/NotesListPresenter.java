@@ -6,10 +6,11 @@ import android.os.Parcelable;
 import com.example.notesapp.domain.Note1;
 import com.example.notesapp.domain.NotesRepository;
 
+import java.util.List;
+
 public class NotesListPresenter implements Parcelable {
 
     private NotesListView view;
-
     private NotesRepository repository;
 
     public NotesListPresenter(NotesListView view, NotesRepository repository) {
@@ -36,8 +37,12 @@ public class NotesListPresenter implements Parcelable {
         repository.addNoteToRepository(noteName, date, noteDescription);
     }
 
-    public void requestNotes() {
-        view.showNotesList(repository.getNotes());
+    public List<Note1> requestNotes() {
+        return repository.getNotes();
+    }
+
+    public void openNote(Note1 note, boolean isEditable) {
+        view.createFragmentResultBundle(note, isEditable);
     }
 
     @Override
