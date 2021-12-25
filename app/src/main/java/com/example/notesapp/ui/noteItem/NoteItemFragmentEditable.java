@@ -5,12 +5,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.notesapp.R;
 import com.example.notesapp.domain.Note1;
+import com.example.notesapp.ui.MainActivity;
 import com.example.notesapp.ui.list.NotesListPresenter;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -20,9 +22,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class NoteItemFragment extends Fragment {
+public class NoteItemFragmentEditable extends Fragment {
 
-    private static final String ARG_NOTE = "note";
+    public static final String ARG_NOTE = "note";
     public static final String ARG_PRESENTER = "presenter";
 
     private NotesListPresenter presenter;
@@ -32,12 +34,12 @@ public class NoteItemFragment extends Fragment {
     private Note1 note;
     private MaterialTextView dateField;
 
-    public NoteItemFragment() {
-        super(R.layout.fragment_note_item);
+    public NoteItemFragmentEditable() {
+        super(R.layout.fragment_note_item_editable);
     }
 
-    public static NoteItemFragment newInstance(Note1 note, NotesListPresenter presenter) {
-        NoteItemFragment fragment = new NoteItemFragment();
+    public static NoteItemFragmentEditable newInstance(Note1 note, NotesListPresenter presenter) {
+        NoteItemFragmentEditable fragment = new NoteItemFragmentEditable();
         Bundle args = new Bundle();
         args.putParcelable(ARG_NOTE, note);
         args.putParcelable(ARG_PRESENTER, presenter);
@@ -58,17 +60,17 @@ public class NoteItemFragment extends Fragment {
         presenter = getArguments().getParcelable(ARG_PRESENTER);
 
         MaterialButton saveButton = view.findViewById(R.id.save_button);
-        noteNameField = view.findViewById(R.id.note_name);
+        noteNameField = view.findViewById(R.id.note_name_view);
         noteNameField.setText(note.getNoteName1());
-        noteDescriptionField = view.findViewById(R.id.note_description);
+        noteDescriptionField = view.findViewById(R.id.note_description_view);
         noteDescriptionField.setText(note.getNoteDescription1());
-        dateField = view.findViewById(R.id.note_date_created);
+        dateField = view.findViewById(R.id.note_date_created_view);
         displayDate();
 
         saveButton.setOnClickListener(v -> addNewNote());
     }
 
-    private void displayDate() {
+    public void displayDate() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ROOT);
         date = dateFormat.format(calendar.getTime());
@@ -95,6 +97,6 @@ public class NoteItemFragment extends Fragment {
         Toast.makeText(getActivity(), "Saved!",
                 Toast.LENGTH_LONG).show();
 
-        getParentFragmentManager().popBackStack();
+        getParentFragmentManager().popBackStack(MainActivity.backstackKeyNotesList, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 }

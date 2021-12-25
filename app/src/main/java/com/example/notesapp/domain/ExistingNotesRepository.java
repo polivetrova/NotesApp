@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ExistingNotesRepository implements NotesRepository {
 
-    ArrayList<Note1> result = new ArrayList<>();
+    ArrayList<Note1> result = new ArrayList<>(Arrays.asList(new Note1("dfslkjdfl", "sdflsdjfkl", "sdpfispo")));
 
     @Override
     public List<Note1> getNotes() {
