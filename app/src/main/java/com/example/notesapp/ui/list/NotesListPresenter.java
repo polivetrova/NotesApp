@@ -3,7 +3,7 @@ package com.example.notesapp.ui.list;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.notesapp.domain.Note1;
+import com.example.notesapp.domain.Note;
 import com.example.notesapp.domain.NotesRepository;
 
 import java.util.List;
@@ -37,11 +37,11 @@ public class NotesListPresenter implements Parcelable {
         repository.addNoteToRepository(noteName, date, noteDescription);
     }
 
-    public List<Note1> requestNotes() {
+    public List<Note> requestNotes() {
         return repository.getNotes();
     }
 
-    public void openNote(Note1 note, boolean isEditable) {
+    public void openNote(Note note, boolean isEditable) {
         view.createFragmentResultBundle(note, isEditable);
     }
 
@@ -54,7 +54,7 @@ public class NotesListPresenter implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
     }
 
-    public void deleteNote(Note1 note) {
+    public void deleteNote(Note note) {
         repository.deleteNoteFromRepository(note);
     }
 }

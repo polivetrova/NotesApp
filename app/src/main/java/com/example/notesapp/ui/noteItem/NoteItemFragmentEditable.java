@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.notesapp.R;
-import com.example.notesapp.domain.Note1;
+import com.example.notesapp.domain.Note;
 import com.example.notesapp.ui.MainActivity;
 import com.example.notesapp.ui.list.NotesListFragment;
 import com.example.notesapp.ui.list.NotesListPresenter;
@@ -32,7 +32,7 @@ public class NoteItemFragmentEditable extends Fragment {
         super(R.layout.fragment_note_item_editable);
     }
 
-    public static NoteItemFragmentEditable newInstance(Note1 note) {
+    public static NoteItemFragmentEditable newInstance(Note note) {
         NoteItemFragmentEditable fragment = new NoteItemFragmentEditable();
         Bundle args = new Bundle();
         args.putParcelable(ARG_NOTE, note);
@@ -49,14 +49,14 @@ public class NoteItemFragmentEditable extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Note1 note = getArguments().getParcelable(ARG_NOTE);
+        Note note = getArguments().getParcelable(ARG_NOTE);
         presenter = NotesListFragment.presenter;
 
         MaterialButton saveButton = view.findViewById(R.id.save_button);
         noteNameField = view.findViewById(R.id.note_name_view);
-        noteNameField.setText(note.getNoteName1());
+        noteNameField.setText(note.getNoteName());
         noteDescriptionField = view.findViewById(R.id.note_description_view);
-        noteDescriptionField.setText(note.getNoteDescription1());
+        noteDescriptionField.setText(note.getNoteDescription());
         MaterialTextView dateField = view.findViewById(R.id.note_date_created_view);
         MainActivity.displayDate(dateField);
         date = dateField.getText().toString();

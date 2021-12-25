@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,7 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.notesapp.R;
 import com.example.notesapp.domain.ExistingNotesRepository;
-import com.example.notesapp.domain.Note1;
+import com.example.notesapp.domain.Note;
 import com.example.notesapp.ui.MainActivity;
 
 import java.util.List;
@@ -26,7 +27,8 @@ public class NotesListFragment extends Fragment implements NotesListView {
     public static final String ARG_NOTES_LIST = "ARG_NOTES_LIST";
     public static final String FRAGMENT_TYPE = "NoteItemFragmentEditable or Uneditable";
 
-    public NotesListFragment() { }
+    public NotesListFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class NotesListFragment extends Fragment implements NotesListView {
         View view = inflater.inflate(R.layout.fragment_notes_list, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.notes_root);
 
-        List<Note1> data = presenter.requestNotes();
+        List<Note> data = presenter.requestNotes();
         initRecyclerView(recyclerView, data);
 
         return view;
@@ -51,16 +53,18 @@ public class NotesListFragment extends Fragment implements NotesListView {
         ((MainActivity) getActivity()).showFloatingActionButton();
     }
 
-    private void initRecyclerView(RecyclerView recyclerView, List<Note1> data) {
+    private void initRecyclerView(RecyclerView recyclerView, List<Note> data) {
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
 
         NotesListAdapter adapter = new NotesListAdapter(data);
         recyclerView.setAdapter(adapter);
+
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
+        itemDecoration.setDrawable(getResources().getDrawable(R.drawable.separator, null));
+        recyclerView.addItemDecoration(itemDecoration);
     }
 
-    public void createFragmentResultBundle(Note1 note, boolean isEditable) {
+    public void createFragmentResultBundle(Note note, boolean isEditable) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(ARG_NOTES_LIST, note);
         bundle.putBoolean(FRAGMENT_TYPE, isEditable);

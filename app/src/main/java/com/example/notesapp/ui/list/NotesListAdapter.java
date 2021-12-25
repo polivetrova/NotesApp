@@ -12,17 +12,17 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notesapp.R;
-import com.example.notesapp.domain.Note1;
+import com.example.notesapp.domain.Note;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
 
 public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.ViewHolder> {
 
-    private final List<Note1> notesSource;
-    Context context;
+    private final List<Note> notesSource;
+    private Context context;
 
-    public NotesListAdapter(List<Note1> notesSource) {
+    public NotesListAdapter(List<Note> notesSource) {
         this.notesSource = notesSource;
     }
 
@@ -36,9 +36,7 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull NotesListAdapter.ViewHolder holder, int position) {
-        holder.getItemNoteNameField().setText(notesSource.get(position).getNoteName1());
-        holder.getItemNoteDateField().setText(notesSource.get(position).getDate1());
-        holder.getItemNoteDescriptionField().setText(notesSource.get(position).getNoteDescription1());
+        holder.bind(notesSource.get(position));
     }
 
     @Override
@@ -90,16 +88,10 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.View
             });
         }
 
-        public MaterialTextView getItemNoteNameField() {
-            return itemNoteNameField;
-        }
-
-        public MaterialTextView getItemNoteDateField() {
-            return itemNoteDateField;
-        }
-
-        public MaterialTextView getItemNoteDescriptionField() {
-            return itemNoteDescriptionField;
+        public void bind(Note note) {
+            itemNoteNameField.setText(note.getNoteName());
+            itemNoteDateField.setText(note.getDate());
+            itemNoteDescriptionField.setText(note.getNoteDescription());
         }
     }
 }
