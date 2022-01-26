@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().setFragmentResultListener(NotesListFragment.KEY_NOTES_LIST, this, (requestKey, result) -> {
             if (result.getBoolean(NotesListFragment.FRAGMENT_TYPE)) {
                 showEditableNoteItemFragment(result.getParcelable(NotesListFragment.ARG_NOTES_LIST));
-            } else if (!result.getBoolean(NotesListFragment.FRAGMENT_TYPE)) {
+            } else {
                 showUneditableNoteItemFragment(result.getParcelable(NotesListFragment.ARG_NOTES_LIST));
             }
         });

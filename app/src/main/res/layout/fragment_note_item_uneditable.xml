@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/_16ssp"
+    android:padding="@dimen/universal_margin"
     tools:context=".ui.noteItem.NoteItemFragmentEditable">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -18,7 +18,7 @@
         android:id="@+id/note_name_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16ssp"
+        android:layout_marginTop="@dimen/universal_margin"
         android:inputType="none"
         android:textSize="@dimen/_16ssp" />
 
@@ -26,7 +26,7 @@
         android:id="@+id/note_date_created_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_16ssp"
+        android:layout_marginBottom="@dimen/universal_margin"
         android:textSize="@dimen/_13ssp"
         android:textStyle="bold" />
 
