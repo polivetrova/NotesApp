@@ -4,14 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/NotesApp/app/src/main/res/drawable-anydpi/ic_avatar.xml" value="0.2235897435897436" />
+        <entry key="..\:/NotesApp/app/src/main/res/drawable/separator.xml" value="0.1" />
         <entry key="..\:/NotesApp/app/src/main/res/drawable/side_nav_bar.xml" value="0.2235897435897436" />
         <entry key="..\:/NotesApp/app/src/main/res/layout-land/activity_main.xml" value="0.1" />
         <entry key="..\:/NotesApp/app/src/main/res/layout-land/contents_main.xml" value="0.17857142857142858" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/activity_main.xml" value="0.14285714285714285" />
-        <entry key="..\:/NotesApp/app/src/main/res/layout/contents_main.xml" value="0.2857142857142857" />
+        <entry key="..\:/NotesApp/app/src/main/res/layout/contents_main.xml" value="0.42857142857142855" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/edit_button.xml" value="0.28020833333333334" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_about.xml" value="0.2109375" />
-        <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_note_item.xml" value="0.18857142857142858" />
+        <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_delete_note.xml" value="0.12571428571428572" />
+        <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_note_item.xml" value="0.1" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_note_item_editable.xml" value="0.28020833333333334" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_note_item_uneditable.xml" value="0.18857142857142858" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/fragment_notes_list.xml" value="0.1" />

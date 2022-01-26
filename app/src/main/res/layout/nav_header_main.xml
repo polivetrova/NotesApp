@@ -7,13 +7,13 @@
     android:background="@drawable/side_nav_bar"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="@dimen/_16ssp">
+    android:padding="@dimen/universal_margin">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginTop="@dimen/_32ssp"
+        android:layout_marginTop="32dp"
         android:contentDescription="@string/user_avatar"
         app:srcCompat="@drawable/ic_avatar" />
 
@@ -27,7 +27,7 @@
         android:id="@+id/drawer_date_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_2ssp"
+        android:layout_marginStart="2dp"
         android:textStyle="bold"
         tools:text="2220.12.12" />
 

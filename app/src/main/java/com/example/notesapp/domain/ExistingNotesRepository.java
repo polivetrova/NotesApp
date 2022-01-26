@@ -5,20 +5,24 @@ import java.util.List;
 
 public class ExistingNotesRepository implements NotesRepository {
 
-    ArrayList<Note1> result = new ArrayList<>();
+    ArrayList<Note> result;
+
+    public ExistingNotesRepository() {
+        result = new ArrayList<>();
+    }
 
     @Override
-    public List<Note1> getNotes() {
+    public List<Note> getNotes() {
         return result;
     }
 
     @Override
     public void addNoteToRepository(String noteName, String date, String noteDescription) {
-        result.add(new Note1(noteName, date, noteDescription));
+        result.add(new Note(noteName, date, noteDescription));
     }
 
     @Override
-    public void deleteNoteFromRepository(Note1 note) {
+    public void deleteNoteFromRepository(Note note) {
         result.remove(note);
     }
 }

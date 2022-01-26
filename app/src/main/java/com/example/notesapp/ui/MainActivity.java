@@ -14,7 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import com.example.notesapp.domain.Note1;
+import com.example.notesapp.domain.Note;
 import com.example.notesapp.ui.list.NotesListFragment;
 import com.example.notesapp.ui.noteItem.NoteItemFragmentEditable;
 import com.example.notesapp.R;
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().setFragmentResultListener(NotesListFragment.KEY_NOTES_LIST, this, (requestKey, result) -> {
             if (result.getBoolean(NotesListFragment.FRAGMENT_TYPE)) {
                 showEditableNoteItemFragment(result.getParcelable(NotesListFragment.ARG_NOTES_LIST));
-            } else if (!result.getBoolean(NotesListFragment.FRAGMENT_TYPE)) {
+            } else {
                 showUneditableNoteItemFragment(result.getParcelable(NotesListFragment.ARG_NOTES_LIST));
             }
         });
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         }));
 
         addNoteButton = findViewById(R.id.add_note_button);
-        addNoteButton.setOnClickListener(v -> showEditableNoteItemFragment(new Note1("", "", "")));
+        addNoteButton.setOnClickListener(v -> showEditableNoteItemFragment(new Note("", "", "")));
     }
 
     private void initToolbar() {
@@ -115,12 +115,12 @@ public class MainActivity extends AppCompatActivity {
         drawer.closeDrawers();
     }
 
-    private void showUneditableNoteItemFragment(Note1 note) {
+    private void showUneditableNoteItemFragment(Note note) {
         NoteItemFragmentUneditable noteItemFragmentUneditable = NoteItemFragmentUneditable.newInstance(note);
         startTransaction(noteItemFragmentUneditable);
     }
 
-    private void showEditableNoteItemFragment(Note1 note) {
+    private void showEditableNoteItemFragment(Note note) {
         NoteItemFragmentEditable noteItemFragmentEditable = NoteItemFragmentEditable.newInstance(note);
         startTransaction(noteItemFragmentEditable);
     }

@@ -3,45 +3,45 @@ package com.example.notesapp.domain;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Note1 implements Parcelable {
+public class Note implements Parcelable {
 
     private final String noteName1;
     private final String noteDescription1;
     private final String date1;
 
-    public Note1(String noteName1, String date1, String noteDescription1) {
-        this.noteName1 = noteName1;
-        this.noteDescription1 = noteDescription1;
-        this.date1 = date1;
+    public Note(String noteName, String date, String noteDescription) {
+        this.noteName1 = noteName;
+        this.noteDescription1 = noteDescription;
+        this.date1 = date;
     }
 
-    protected Note1(Parcel in) {
+    protected Note(Parcel in) {
         noteName1 = in.readString();
         noteDescription1 = in.readString();
         date1 = in.readString();
     }
 
-    public static final Creator<Note1> CREATOR = new Creator<Note1>() {
+    public static final Creator<Note> CREATOR = new Creator<Note>() {
         @Override
-        public Note1 createFromParcel(Parcel in) {
-            return new Note1(in);
+        public Note createFromParcel(Parcel in) {
+            return new Note(in);
         }
 
         @Override
-        public Note1[] newArray(int size) {
-            return new Note1[size];
+        public Note[] newArray(int size) {
+            return new Note[size];
         }
     };
 
-    public String getNoteName1() {
+    public String getNoteName() {
         return noteName1;
     }
 
-    public String getNoteDescription1() {
+    public String getNoteDescription() {
         return noteDescription1;
     }
 
-    public String getDate1() {
+    public String getDate() {
         return date1;
     }
 
