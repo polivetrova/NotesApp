@@ -36,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager manager = getSupportFragmentManager();
     public static String backstackKeyNotesList = "Notes list";
 
-    // научиться сохранять изменения в существующей заметке, а не создавать из изменений новую
-    //
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

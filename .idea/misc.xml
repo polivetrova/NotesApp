@@ -22,8 +22,12 @@
         <entry key="..\:/NotesApp/app/src/main/res/layout/notes_list_item.xml" value="0.18857142857142858" />
         <entry key="..\:/NotesApp/app/src/main/res/layout/notes_list_item_uneditable.xml" value="0.18020833333333333" />
         <entry key="..\:/NotesApp/app/src/main/res/menu/activity_main_drawer.xml" value="0.2109375" />
+        <entry key="..\:/NotesApp/app/src/main/res/menu/note_menu.xml" value="0.2857142857142857" />
       </map>
     </option>
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_eye.xml" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

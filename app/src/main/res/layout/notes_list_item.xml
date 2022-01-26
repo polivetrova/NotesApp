@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             app:layout_constraintBottom_toTopOf="@id/notes_list_item_description_field"
-            app:layout_constraintEnd_toStartOf="@id/open_note_button"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notes_list_item_name_field"
             tools:text="dsfpsodifposd" />
@@ -49,27 +49,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notes_list_item_date_field"
             tools:text="dsfpsodifposd" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/edit_note_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/open_note_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/universal_margin"
-            android:src="@drawable/ic_eye"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/edit_note_button"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
