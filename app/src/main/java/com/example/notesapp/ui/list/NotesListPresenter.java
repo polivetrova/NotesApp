@@ -57,4 +57,8 @@ public class NotesListPresenter implements Parcelable {
     public void deleteNote(Note note) {
         repository.deleteNoteFromRepository(note);
     }
+
+    public void rewriteNote(Note note, String noteName, String date, String noteDescription) {
+        repository.rewriteNote(note, noteName, date, noteDescription);
+    }
 }
