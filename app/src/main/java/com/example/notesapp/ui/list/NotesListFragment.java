@@ -71,6 +71,9 @@ public class NotesListFragment extends Fragment implements NotesListView {
             case R.id.action_open_note:
                 adapter.openNote();
                 return true;
+            case R.id.action_delete_note:
+                adapter.deleteNote();
+                return true;
         }
         return super.onContextItemSelected(item);
     }

@@ -57,6 +57,17 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.View
         NotesListFragment.presenter.openNote(notesSource.get(adapterPosition), false);
     }
 
+    public void deleteNote() {
+        new AlertDialog.Builder(context)
+                .setTitle("Want to delete the note?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    NotesListFragment.presenter.deleteNote(notesSource.get(adapterPosition));
+                    notifyItemRemoved(adapterPosition);
+                })
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final MaterialTextView itemNoteNameField;
@@ -77,19 +88,6 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.View
             itemView.setOnClickListener(v -> {
                 itemView.showContextMenu(itemView.getRight(), contextMenuCoordinateY + 16);
                 adapterPosition = getAdapterPosition();
-            });
-
-            itemView.setOnLongClickListener(v -> {
-                new AlertDialog.Builder(context)
-                        .setTitle("Want to delete the note?")
-                        .setPositiveButton("Yes", (dialog, which) -> {
-                            NotesListFragment.presenter.deleteNote(notesSource.get(getAdapterPosition()));
-                            itemView.setVisibility(View.GONE);
-                        })
-                        .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
-                        .show();
-                notifyDataSetChanged();
-                return true;
             });
         }
 
