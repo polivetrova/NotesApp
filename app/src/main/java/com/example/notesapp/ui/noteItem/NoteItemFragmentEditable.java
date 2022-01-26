@@ -26,7 +26,6 @@ public class NoteItemFragmentEditable extends Fragment {
     private NotesListPresenter presenter;
     private TextInputEditText noteNameField;
     private TextInputEditText noteDescriptionField;
-    private String date;
 
     public NoteItemFragmentEditable() {
         super(R.layout.fragment_note_item_editable);
@@ -52,38 +51,33 @@ public class NoteItemFragmentEditable extends Fragment {
         Note note = getArguments().getParcelable(ARG_NOTE);
         presenter = NotesListFragment.presenter;
 
+        boolean isNewNote;
+
         MaterialButton saveButton = view.findViewById(R.id.save_button);
         noteNameField = view.findViewById(R.id.note_name_view);
         noteNameField.setText(note.getNoteName());
         noteDescriptionField = view.findViewById(R.id.note_description_view);
         noteDescriptionField.setText(note.getNoteDescription());
         MaterialTextView dateField = view.findViewById(R.id.note_date_created_view);
+
+        isNewNote = note.getNoteName().equals("") && note.getNoteDescription().equals("") && note.getDate().equals("");
+
         MainActivity.displayDate(dateField);
-        date = dateField.getText().toString();
+        String date = dateField.getText().toString();
 
-        saveButton.setOnClickListener(v -> addNewNote());
-    }
+        saveButton.setOnClickListener(v -> {
 
-    public void addNewNote() {
+            if (isNewNote) {
+                presenter.saveNote(noteNameField.getText().toString(), date, noteDescriptionField.getText().toString());
 
-        String noteName;
-        String noteDescription;
+            } else {
+                presenter.rewriteNote(note, noteNameField.getText().toString(), date, noteDescriptionField.getText().toString());
+            }
 
-        if (noteNameField.getText() != null) {
-            noteName = noteNameField.getText().toString();
-        } else {
-            noteName = "";
-        }
-        if (noteDescriptionField.getText() != null) {
-            noteDescription = noteDescriptionField.getText().toString();
-        } else {
-            noteDescription = "";
-        }
-        presenter.saveNote(noteName, date, noteDescription);
+            Toast.makeText(getActivity(), "Saved!",
+                    Toast.LENGTH_SHORT).show();
 
-        Toast.makeText(getActivity(), "Saved!",
-                Toast.LENGTH_SHORT).show();
-
-        getParentFragmentManager().popBackStack(MainActivity.backstackKeyNotesList, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            getParentFragmentManager().popBackStack(MainActivity.backstackKeyNotesList, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        });
     }
 }

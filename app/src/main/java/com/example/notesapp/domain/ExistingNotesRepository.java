@@ -25,4 +25,9 @@ public class ExistingNotesRepository implements NotesRepository {
     public void deleteNoteFromRepository(Note note) {
         result.remove(note);
     }
+
+    @Override
+    public void rewriteNote(Note note, String noteName, String date, String noteDescription) {
+        result.set(result.indexOf(note), new Note(noteName, date, noteDescription));
+    }
 }
