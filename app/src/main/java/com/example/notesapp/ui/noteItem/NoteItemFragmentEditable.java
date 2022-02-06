@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.notesapp.R;
 import com.example.notesapp.domain.Note;
@@ -73,9 +72,6 @@ public class NoteItemFragmentEditable extends Fragment {
             } else {
                 presenter.rewriteNote(note, noteNameField.getText().toString(), date, noteDescriptionField.getText().toString());
             }
-
-            Toast.makeText(requireContext(), "Saved!",
-                    Toast.LENGTH_SHORT).show();
 
             getParentFragmentManager().popBackStack(MainActivity.backstackKeyNotesList, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         });

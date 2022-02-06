@@ -14,20 +14,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notesapp.R;
 import com.example.notesapp.domain.Note;
+import com.example.notesapp.domain.NotesRepository;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
 
 public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.ViewHolder> {
 
-    private final ArrayList<Note> notesSource;
+    private ArrayList<Note> notesSource;
     private final Fragment fragment;
     private Context context;
     private int adapterPosition;
 
-    public NotesListAdapter(ArrayList<Note> notesSource, Fragment fragment) {
-        this.notesSource = notesSource;
+    public NotesListAdapter(Fragment fragment) {
         this.fragment = fragment;
+    }
+
+    public void setNotesSource(NotesRepository notesRepository) {
+        this.notesSource = notesRepository.getNotes();
+        notifyDataSetChanged();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

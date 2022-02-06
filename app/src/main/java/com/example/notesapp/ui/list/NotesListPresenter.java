@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.example.notesapp.domain.Note;
 import com.example.notesapp.domain.NotesRepository;
+import com.example.notesapp.domain.NotesRepositoryFirestoreImpl;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
@@ -44,8 +45,7 @@ public class NotesListPresenter implements Parcelable {
 
     public void saveNote(String noteName, String date, String noteDescription) {
         repository.addNoteToRepository(noteName, date, noteDescription);
-        String jsonNotes = new GsonBuilder().create().toJson(repository.getNotes());
-        view.putToSharedPref(jsonNotes);
+        updateDataInSharedPref();
     }
 
     public void rewriteNote(Note note, String noteName, String date, String noteDescription) {
@@ -70,5 +70,10 @@ public class NotesListPresenter implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+    }
+
+    public NotesRepository initRepository(NotesListAdapter adapter) {
+        new NotesRepositoryFirestoreImpl().init(notesData -> adapter.notifyDataSetChanged());
+        return repository;
     }
 }

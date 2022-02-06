@@ -21,7 +21,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.notesapp.R;
-import com.example.notesapp.domain.ExistingNotesRepository;
+import com.example.notesapp.domain.NotesRepositoryFirestoreImpl;
+//import com.example.notesapp.domain.NotesRepositoryImpl;
 import com.example.notesapp.domain.Note;
 import com.example.notesapp.ui.MainActivity;
 import com.google.gson.GsonBuilder;
@@ -37,7 +38,7 @@ public class NotesListFragment extends Fragment implements NotesListView {
     public static final String KEY_NOTES_LIST = "KEY_NOTES_LIST";
     public static final String ARG_NOTES_LIST = "ARG_NOTES_LIST";
     public static final String FRAGMENT_TYPE = "NoteItemFragmentEditable or Uneditable";
-    private NotesListAdapter adapter;
+    public NotesListAdapter adapter;
     private RecyclerView recyclerView;
 
     private SharedPreferences sharedPref = null;
@@ -50,7 +51,7 @@ public class NotesListFragment extends Fragment implements NotesListView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new NotesListPresenter(this, new ExistingNotesRepository());
+        presenter = new NotesListPresenter(this, new NotesRepositoryFirestoreImpl());
         sharedPref = requireContext().getSharedPreferences("My Preferences", MODE_PRIVATE);
     }
 
@@ -59,6 +60,8 @@ public class NotesListFragment extends Fragment implements NotesListView {
         View view = inflater.inflate(R.layout.fragment_notes_list, container, false);
         initViews(view);
         setHasOptionsMenu(true);
+
+        adapter.setNotesSource(presenter.initRepository(adapter));
         return view;
     }
 
@@ -95,7 +98,7 @@ public class NotesListFragment extends Fragment implements NotesListView {
         recyclerView = view.findViewById(R.id.notes_root);
         data = presenter.requestNotes();
         checkSharedPref();
-        initRecyclerView(data);
+        initRecyclerView();
     }
 
     private void checkSharedPref() {
@@ -112,10 +115,10 @@ public class NotesListFragment extends Fragment implements NotesListView {
         }
     }
 
-    private void initRecyclerView(ArrayList<Note> data) {
+    private void initRecyclerView() {
         recyclerView.setHasFixedSize(true);
 
-        adapter = new NotesListAdapter(data, this);
+        adapter = new NotesListAdapter(this);
         recyclerView.setAdapter(adapter);
 
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);

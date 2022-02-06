@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public interface NotesRepository {
 
+    NotesRepository init(NotesRepositoryResponse notesRepositoryResponse);
+
     ArrayList<Note> getNotes();
 
     void addNoteToRepository(String noteName, String date, String noteDescription);

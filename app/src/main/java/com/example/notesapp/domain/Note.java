@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 public class Note implements Parcelable {
 
+    private String id;
+
     private final String noteName1;
     private final String noteDescription1;
     private final String date1;
@@ -43,6 +45,14 @@ public class Note implements Parcelable {
 
     public String getDate() {
         return date1;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
