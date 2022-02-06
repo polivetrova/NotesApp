@@ -16,16 +16,16 @@ import com.example.notesapp.R;
 import com.example.notesapp.domain.Note;
 import com.google.android.material.textview.MaterialTextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.ViewHolder> {
 
-    private final List<Note> notesSource;
+    private final ArrayList<Note> notesSource;
     private final Fragment fragment;
     private Context context;
     private int adapterPosition;
 
-    public NotesListAdapter(List<Note> notesSource, Fragment fragment) {
+    public NotesListAdapter(ArrayList<Note> notesSource, Fragment fragment) {
         this.notesSource = notesSource;
         this.fragment = fragment;
     }

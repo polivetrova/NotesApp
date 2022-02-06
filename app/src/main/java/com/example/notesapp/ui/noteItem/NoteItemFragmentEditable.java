@@ -74,7 +74,7 @@ public class NoteItemFragmentEditable extends Fragment {
                 presenter.rewriteNote(note, noteNameField.getText().toString(), date, noteDescriptionField.getText().toString());
             }
 
-            Toast.makeText(getActivity(), "Saved!",
+            Toast.makeText(requireContext(), "Saved!",
                     Toast.LENGTH_SHORT).show();
 
             getParentFragmentManager().popBackStack(MainActivity.backstackKeyNotesList, FragmentManager.POP_BACK_STACK_INCLUSIVE);

@@ -5,8 +5,9 @@ import android.os.Parcelable;
 
 import com.example.notesapp.domain.Note;
 import com.example.notesapp.domain.NotesRepository;
+import com.google.gson.GsonBuilder;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class NotesListPresenter implements Parcelable {
 
@@ -33,16 +34,33 @@ public class NotesListPresenter implements Parcelable {
         }
     };
 
-    public void saveNote(String noteName, String date, String noteDescription) {
-        repository.addNoteToRepository(noteName, date, noteDescription);
-    }
-
-    public List<Note> requestNotes() {
+    public ArrayList<Note> requestNotes() {
         return repository.getNotes();
     }
 
     public void openNote(Note note, boolean isEditable) {
         view.createFragmentResultBundle(note, isEditable);
+    }
+
+    public void saveNote(String noteName, String date, String noteDescription) {
+        repository.addNoteToRepository(noteName, date, noteDescription);
+        String jsonNotes = new GsonBuilder().create().toJson(repository.getNotes());
+        view.putToSharedPref(jsonNotes);
+    }
+
+    public void rewriteNote(Note note, String noteName, String date, String noteDescription) {
+        repository.rewriteNote(note, noteName, date, noteDescription);
+        updateDataInSharedPref();
+    }
+
+    public void deleteNote(Note note) {
+        repository.deleteNoteFromRepository(note);
+        updateDataInSharedPref();
+    }
+
+    private void updateDataInSharedPref() {
+        String jsonNotes = new GsonBuilder().create().toJson(repository.getNotes());
+        view.putToSharedPref(jsonNotes);
     }
 
     @Override
@@ -52,13 +70,5 @@ public class NotesListPresenter implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-    }
-
-    public void deleteNote(Note note) {
-        repository.deleteNoteFromRepository(note);
-    }
-
-    public void rewriteNote(Note note, String noteName, String date, String noteDescription) {
-        repository.rewriteNote(note, noteName, date, noteDescription);
     }
 }

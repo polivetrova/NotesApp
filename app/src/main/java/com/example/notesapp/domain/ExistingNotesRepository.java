@@ -1,7 +1,6 @@
 package com.example.notesapp.domain;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ExistingNotesRepository implements NotesRepository {
 
@@ -12,7 +11,7 @@ public class ExistingNotesRepository implements NotesRepository {
     }
 
     @Override
-    public List<Note> getNotes() {
+    public ArrayList<Note> getNotes() {
         return result;
     }
 
