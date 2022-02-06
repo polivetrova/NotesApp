@@ -1,18 +1,25 @@
 package com.example.notesapp.domain;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class ExistingNotesRepository implements NotesRepository {
+public class NotesRepositoryImpl implements NotesRepository {
 
-    ArrayList<Note> result;
+    private ArrayList<Note> result;
 
-    public ExistingNotesRepository() {
+    public NotesRepositoryImpl() {
         result = new ArrayList<>();
     }
 
     @Override
-    public List<Note> getNotes() {
+    public NotesRepository init(NotesRepositoryResponse notesRepositoryResponse) {
+        if (notesRepositoryResponse != null) {
+            notesRepositoryResponse.initialized(this);
+        }
+        return this;
+    }
+
+    @Override
+    public ArrayList<Note> getNotes() {
         return result;
     }
 
