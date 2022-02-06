@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -26,6 +29,8 @@ public class NotesListFragment extends Fragment implements NotesListView {
     public static final String KEY_NOTES_LIST = "KEY_NOTES_LIST";
     public static final String ARG_NOTES_LIST = "ARG_NOTES_LIST";
     public static final String FRAGMENT_TYPE = "NoteItemFragmentEditable or Uneditable";
+    private NotesListAdapter adapter;
+    private RecyclerView recyclerView;
 
     public NotesListFragment() {
     }
@@ -39,11 +44,8 @@ public class NotesListFragment extends Fragment implements NotesListView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notes_list, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.notes_root);
-
-        List<Note> data = presenter.requestNotes();
-        initRecyclerView(recyclerView, data);
-
+        initViews(view);
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -53,10 +55,39 @@ public class NotesListFragment extends Fragment implements NotesListView {
         ((MainActivity) getActivity()).showFloatingActionButton();
     }
 
-    private void initRecyclerView(RecyclerView recyclerView, List<Note> data) {
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater menuInflater = requireActivity().getMenuInflater();
+        menuInflater.inflate(R.menu.note_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit_note:
+                adapter.editNote();
+                return true;
+            case R.id.action_open_note:
+                adapter.openNote();
+                return true;
+            case R.id.action_delete_note:
+                adapter.deleteNote();
+                return true;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    private void initViews(View view) {
+        recyclerView = view.findViewById(R.id.notes_root);
+        List<Note> data = presenter.requestNotes();
+        initRecyclerView(data);
+    }
+
+    private void initRecyclerView(List<Note> data) {
         recyclerView.setHasFixedSize(true);
 
-        NotesListAdapter adapter = new NotesListAdapter(data);
+        adapter = new NotesListAdapter(data, this);
         recyclerView.setAdapter(adapter);
 
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);

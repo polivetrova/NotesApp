@@ -1,14 +1,15 @@
 package com.example.notesapp.ui.list;
 
 import android.content.Context;
-import android.os.Handler;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatImageView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notesapp.R;
@@ -20,12 +21,16 @@ import java.util.List;
 public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.ViewHolder> {
 
     private final List<Note> notesSource;
+    private final Fragment fragment;
     private Context context;
+    private int adapterPosition;
 
-    public NotesListAdapter(List<Note> notesSource) {
+    public NotesListAdapter(List<Note> notesSource, Fragment fragment) {
         this.notesSource = notesSource;
+        this.fragment = fragment;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @NonNull
     @Override
     public NotesListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,48 +49,52 @@ public class NotesListAdapter extends RecyclerView.Adapter<NotesListAdapter.View
         return notesSource.size();
     }
 
+    public void editNote() {
+        NotesListFragment.presenter.openNote(notesSource.get(adapterPosition), true);
+    }
+
+    public void openNote() {
+        NotesListFragment.presenter.openNote(notesSource.get(adapterPosition), false);
+    }
+
+    public void deleteNote() {
+        new AlertDialog.Builder(context)
+                .setTitle("Want to delete the note?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    NotesListFragment.presenter.deleteNote(notesSource.get(adapterPosition));
+                    notifyItemRemoved(adapterPosition);
+                })
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final MaterialTextView itemNoteNameField;
         private final MaterialTextView itemNoteDateField;
         private final MaterialTextView itemNoteDescriptionField;
-        private final AppCompatImageView openTheNoteButton;
-        private final AppCompatImageView editTheNoteButton;
 
+        @RequiresApi(api = Build.VERSION_CODES.N)
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             itemNoteNameField = itemView.findViewById(R.id.notes_list_item_name_field);
             itemNoteDateField = itemView.findViewById(R.id.notes_list_item_date_field);
             itemNoteDescriptionField = itemView.findViewById(R.id.notes_list_item_description_field);
-            openTheNoteButton = itemView.findViewById(R.id.open_note_button);
-            editTheNoteButton = itemView.findViewById(R.id.edit_note_button);
+
+            registerContextMenu(itemView);
+            float contextMenuCoordinateY = itemView.getY();
 
             itemView.setOnClickListener(v -> {
-                openTheNoteButton.setVisibility(View.VISIBLE);
-                editTheNoteButton.setVisibility(View.VISIBLE);
-
-                openTheNoteButton.setOnClickListener(v1 -> NotesListFragment.presenter.openNote(notesSource.get(getAdapterPosition()), false));
-
-                editTheNoteButton.setOnClickListener(v2 -> NotesListFragment.presenter.openNote(notesSource.get(getAdapterPosition()), true));
-
-                new Handler().postDelayed(() -> {
-                    openTheNoteButton.setVisibility(View.INVISIBLE);
-                    editTheNoteButton.setVisibility(View.INVISIBLE);
-                }, 5000);
+                itemView.showContextMenu(itemView.getRight(), contextMenuCoordinateY + 16);
+                adapterPosition = getAdapterPosition();
             });
+        }
 
-            itemView.setOnLongClickListener(v -> {
-                new AlertDialog.Builder(context)
-                        .setTitle("Want to delete the note?")
-                        .setPositiveButton("Yes", (dialog, which) -> {
-                            NotesListFragment.presenter.deleteNote(notesSource.get(getAdapterPosition()));
-                            itemView.setVisibility(View.GONE);
-                        })
-                        .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
-                        .show();
-                return false;
-            });
+        private void registerContextMenu(@NonNull View itemView) {
+            if (fragment != null) {
+                fragment.registerForContextMenu(itemView);
+            }
         }
 
         public void bind(Note note) {

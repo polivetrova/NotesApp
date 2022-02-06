@@ -11,4 +11,6 @@
     <string name="about_developers">Developed by Polina Vetrova @polivetrova</string>
     <string name="notes">Notes</string>
     <string name="enter_your_username">Enter your username</string>
+    <string name="edit">Edit</string>
+    <string name="open">Open</string>
 </resources>
