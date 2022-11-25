@@ -51,9 +51,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        getSupportFragmentManager().setFragmentResultListener(NoteItemFragmentUneditable.KEY_NOTE_ITEM, this, ((requestKey, result) -> {
-            showEditableNoteItemFragment(result.getParcelable(NoteItemFragmentUneditable.ARG_NOTE_2));
-        }));
+        getSupportFragmentManager().setFragmentResultListener(NoteItemFragmentUneditable.KEY_NOTE_ITEM, this, ((requestKey, result) -> showEditableNoteItemFragment(result.getParcelable(NoteItemFragmentUneditable.ARG_NOTE_2))));
 
         addNoteButton = findViewById(R.id.add_note_button);
         addNoteButton.setOnClickListener(v -> showEditableNoteItemFragment(new Note("", "", "")));

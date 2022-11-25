@@ -8,22 +8,22 @@ public class Note implements Parcelable {
 
     private String id;
 
-    private final String noteName1;
-    private final String noteDescription1;
-    private final String date1;
+    private final String noteName;
+    private final String noteDescription;
+    private final String date;
 
     public Note(String noteName, String date, String noteDescription) {
         this.id = "b" + Math.random();
-        this.noteName1 = noteName;
-        this.noteDescription1 = noteDescription;
-        this.date1 = date;
+        this.noteName = noteName;
+        this.noteDescription = noteDescription;
+        this.date = date;
         Log.i("id", id);
     }
 
     protected Note(Parcel in) {
-        noteName1 = in.readString();
-        noteDescription1 = in.readString();
-        date1 = in.readString();
+        noteName = in.readString();
+        noteDescription = in.readString();
+        date = in.readString();
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -39,15 +39,15 @@ public class Note implements Parcelable {
     };
 
     public String getNoteName() {
-        return noteName1;
+        return noteName;
     }
 
     public String getNoteDescription() {
-        return noteDescription1;
+        return noteDescription;
     }
 
     public String getDate() {
-        return date1;
+        return date;
     }
 
     public String getId() {
@@ -65,8 +65,8 @@ public class Note implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(noteName1);
-        dest.writeString(noteDescription1);
-        dest.writeString(date1);
+        dest.writeString(noteName);
+        dest.writeString(noteDescription);
+        dest.writeString(date);
     }
 }

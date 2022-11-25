@@ -15,8 +15,8 @@ public class NotesRepositoryFirestoreImpl implements NotesRepository {
     private static final String NOTES_COLLECTION = "notes";
     private static final String TAG = "[NotesRepositoryFirestoreImpl]";
 
-    private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-    private CollectionReference collection = firestore.collection(NOTES_COLLECTION);
+    private final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    private final CollectionReference collection = firestore.collection(NOTES_COLLECTION);
     private ArrayList<Note> notes = new ArrayList<>();
 
     @Override
@@ -26,7 +26,6 @@ public class NotesRepositoryFirestoreImpl implements NotesRepository {
                 notes = new ArrayList<>();
                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                     Map<String, Object> doc = documentSnapshot.getData();
-//                    String id = documentSnapshot.getId();
                     Note note = NotesMapping.toNote(doc);
                     notes.add(note);
                 }
@@ -48,7 +47,6 @@ public class NotesRepositoryFirestoreImpl implements NotesRepository {
     public void addNoteToRepository(String noteName, String date, String noteDescription) {
         Note note = new Note(noteName, date, noteDescription);
         collection.add(NotesMapping.toDocument(note));
-//                .addOnSuccessListener(documentReference -> note.setId(documentReference.getId()));
         notes.add(note);
     }
 

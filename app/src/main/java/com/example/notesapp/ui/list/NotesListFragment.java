@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import com.example.notesapp.R;
 import com.example.notesapp.domain.NotesRepositoryFirestoreImpl;
-//import com.example.notesapp.domain.NotesRepositoryImpl;
 import com.example.notesapp.domain.Note;
 import com.example.notesapp.ui.MainActivity;
 import com.google.gson.GsonBuilder;
