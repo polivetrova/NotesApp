@@ -5,14 +5,12 @@ import java.util.Map;
 
 public class NotesMapping {
 
-    public static Note toNote(String id, Map<String, Object> doc) {
+    public static Note toNote(Map<String, Object> doc) {
         String name = (String) doc.get(Fields.NOTE_NAME);
         String date = (String) doc.get(Fields.NOTE_DATE);
         String description = (String) doc.get(Fields.NOTE_DESCRIPTION);
 
-        Note result = new Note(name, date, description);
-        result.setId(id);
-        return result;
+        return new Note(name, date, description);
     }
 
     public static Map<String, Object> toDocument(Note note) {

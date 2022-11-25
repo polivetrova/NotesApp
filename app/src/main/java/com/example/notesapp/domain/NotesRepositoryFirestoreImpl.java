@@ -26,8 +26,8 @@ public class NotesRepositoryFirestoreImpl implements NotesRepository {
                 notes = new ArrayList<>();
                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                     Map<String, Object> doc = documentSnapshot.getData();
-                    String id = documentSnapshot.getId();
-                    Note note = NotesMapping.toNote(id, doc);
+//                    String id = documentSnapshot.getId();
+                    Note note = NotesMapping.toNote(doc);
                     notes.add(note);
                 }
                     Log.d(TAG, "success " + notes.size() + " qnt");
@@ -47,8 +47,8 @@ public class NotesRepositoryFirestoreImpl implements NotesRepository {
     @Override
     public void addNoteToRepository(String noteName, String date, String noteDescription) {
         Note note = new Note(noteName, date, noteDescription);
-        collection.add(NotesMapping.toDocument(note))
-                .addOnSuccessListener(documentReference -> note.setId(documentReference.getId()));
+        collection.add(NotesMapping.toDocument(note));
+//                .addOnSuccessListener(documentReference -> note.setId(documentReference.getId()));
         notes.add(note);
     }
 

@@ -2,6 +2,7 @@ package com.example.notesapp.domain;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class Note implements Parcelable {
 
@@ -12,9 +13,11 @@ public class Note implements Parcelable {
     private final String date1;
 
     public Note(String noteName, String date, String noteDescription) {
+        this.id = "b" + Math.random();
         this.noteName1 = noteName;
         this.noteDescription1 = noteDescription;
         this.date1 = date;
+        Log.i("id", id);
     }
 
     protected Note(Parcel in) {
